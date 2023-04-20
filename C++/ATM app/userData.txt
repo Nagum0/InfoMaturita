@@ -1,0 +1,3 @@
+Zeki 0 00000
+Astolfo 1 11111
+Ferris 0 22222
