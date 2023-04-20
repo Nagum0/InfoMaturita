@@ -4,6 +4,8 @@
 using namespace std;
 
 map<string, string> map2;
+string firstName = "Astolfo";
+bool check;
 
 void editMap(map<string, string>& argMap);
 
@@ -11,7 +13,15 @@ int main() {
     editMap(map2);
     
     for (auto itr = map2.begin(); itr != map2.end(); itr++) {
-        cout << (*itr).first << "\n";
+        if (firstName == (*itr).first && (*itr).second == "0") {
+            cout << "found" << " new account" << "\n";
+        }
+        else if (firstName == (*itr).first && (*itr).second == "1") {
+            cout << "found" << " existing account" << "\n";
+        }
+        else {
+            cout << "not found" << "\n";
+        }
     }
 
     return 0;
