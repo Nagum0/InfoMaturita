@@ -22,14 +22,15 @@ void personSetup(Info &user);
 void personInfo(Info &person);
 void listOfCmds();
 void readFile(map<string, string>& argMap);
-void findUser(map<string, string>& argMap, string element);
+bool findUser(map<string, string>& argMap, string element);
 
 /* Main function */
 int main() {
     cout << "------------Zeki's Bank ATM------------" << "\n";
     //Reading data file
-    personSetup(user);
     readFile(dataMap);
+    //Person setup/login
+    personSetup(user);
 
     //Command variable
     string cmd;
@@ -60,6 +61,10 @@ void personSetup(Info &user) {
     cin >> user.lastName;
     cout << "Age: ";
     cin >> user.age;
+
+    //Check if user exists inside the database
+    if (findUser(dataMap, user.firstName)) { cout << "Continue\n"; }
+    else if (findUser(dataMap, user.firstName) == false) { cout << "Type `new_acc` to setup your account\n"; }
 }
 
 //Print person info func
@@ -90,9 +95,9 @@ void readFile(map<string, string>& argMap) {
 }
 
 //Find user function
-void findUser(map<string, string>& argMap, string element) {
+bool findUser(map<string, string>& argMap, string element) {
     auto it = argMap.find(element);
 
-    if (it != argMap.end()) { cout << it->first << "\n"; }
-    else { cout << "User not found" << "\n"; }   
+    if (it != argMap.end()) { cout << "Found" << "\n"; return true; }
+    else { cout << "User not found" << "\n"; return false;}   
 }
