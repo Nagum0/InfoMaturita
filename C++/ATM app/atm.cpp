@@ -23,6 +23,7 @@ void personInfo(Info &person);
 void listOfCmds();
 void readFile(map<string, string>& argMap);
 bool findUser(map<string, string>& argMap, string element);
+void newAccountSetup();
 
 /* Main function */
 int main() {
@@ -57,14 +58,10 @@ int main() {
 void personSetup(Info &user) {
     cout << "First name: ";
     cin >> user.firstName;
-    cout << "Last name: ";
-    cin >> user.lastName;
-    cout << "Age: ";
-    cin >> user.age;
 
     //Check if user exists inside the database
-    if (findUser(dataMap, user.firstName)) { cout << "Continue\n"; }
-    else if (findUser(dataMap, user.firstName) == false) { cout << "Type `new_acc` to setup your account\n"; }
+    if (findUser(dataMap, user.firstName)) { cout << "Found. Continue.\n"; }
+    else if (findUser(dataMap, user.firstName) == false) { cout << "Not found. Type `new_acc` to setup your account.\n"; }
 }
 
 //Print person info func
@@ -98,6 +95,6 @@ void readFile(map<string, string>& argMap) {
 bool findUser(map<string, string>& argMap, string element) {
     auto it = argMap.find(element);
 
-    if (it != argMap.end()) { cout << "Found" << "\n"; return true; }
-    else { cout << "User not found" << "\n"; return false;}   
+    if (it != argMap.end()) { return true; }
+    else { return false;}   
 }
