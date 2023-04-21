@@ -22,20 +22,18 @@ void personSetup(Info &user);
 void personInfo(Info &person);
 void listOfCmds();
 void readFile(map<string, string>& argMap);
+void findUser(map<string, string>& argMap, string element);
 
 /* Main function */
 int main() {
     cout << "------------Zeki's Bank ATM------------" << "\n";
     //Reading data file
+    personSetup(user);
     readFile(dataMap);
-
-    for (auto itr = dataMap.begin(); itr != dataMap.end(); itr++) {
-        cout << (*itr).first << " : " << (*itr).second << "\n";
-    }
 
     //Command variable
     string cmd;
-    
+
     //Mainloop
     do {
         cout << "> ";
@@ -44,6 +42,7 @@ int main() {
         if (cmd == "setup" || cmd == "Setup") { personSetup(user); continue; }
         else if (cmd == "info" || cmd == "Info") { personInfo(user); continue; }
         else if (cmd == "cmds" || cmd == "command_list") { listOfCmds(); continue; }
+        else if (cmd == "find_user") { findUser(dataMap, user.firstName); continue; }
         else if (cmd == "!!" || cmd == "exit") { break; }
         else { cout << "Unkown command. \nFor command list type 'cmds' or 'command_list'.\n"; continue; }
 
@@ -88,4 +87,12 @@ void readFile(map<string, string>& argMap) {
     }
 
     file.close();
+}
+
+//Find user function
+void findUser(map<string, string>& argMap, string element) {
+    auto it = argMap.find(element);
+
+    if (it != argMap.end()) { cout << it->first << "\n"; }
+    else { cout << "User not found" << "\n"; }   
 }
