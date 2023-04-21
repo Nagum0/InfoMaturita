@@ -1,10 +1,11 @@
 #include <iostream>
 #include <map>
 #include <fstream>
+#include <typeinfo>
 using namespace std;
 
 map<string, string> map2;
-string firstName = "Ferris";
+string firstName = "Bunti";
 bool check;
 
 void editMap(map<string, string>& argMap);
@@ -14,15 +15,12 @@ int main() {
     
     //Check if account exists or not
     for (auto itr = map2.begin(); itr != map2.end(); itr++) {
-        if ((*itr).first == firstName) {
-            if ((*itr).second == "0") { check = true; }
-            else if ((*itr).second == "1") { check = false; }
-            else { return 1; }
-        }
-        //else { cout << "Something went wrong...\n"; return 1; }
+        if ((*itr).first == firstName && (*itr).second == "0") { check = true; }
+        else if ((*itr).first == firstName && (*itr).second == "1") { check = false; }
+        else { cout << "Username not recognized!\n"; check = true; }
     }
 
-    printf("%s %s \n", firstName.c_str(), check?"true" : "false");
+    printf("%s %s \n", firstName.c_str(), check?"new" : "existing");
 
     return 0;
 }
