@@ -12,36 +12,32 @@ struct Person {
     string balance;
 };
 
-Person zeki;
+Person user;
 string firstName = "Zeki";
 map<string, vector<string>> myMap;
+
 void getMapData(map<string, vector<string>> &argMap);
-bool findUser(map<string, vector<string>> &argMap, string search);
+void fillStruct(map<string, vector<string>> &argMap, string &search, Person &user);
 
 int main() {
     getMapData(myMap);
+    fillStruct(myMap, firstName, user);
 
-    if (findUser(myMap, firstName)) {
-        for (auto itr = myMap.begin(); itr != myMap.end(); itr++) {
-            cout << (*itr).first << " ";
-
-            for (vector<string>::size_type i = 0; i < (*itr).second.size(); i++) {
-                cout << (*itr).second[i] << " ";
-            }
-
-            cout << "\n";
-        }
-    }
-    else { cout << "User not found" << "\n"; }
+    cout << "Extracted user data: \n" << user.name << ", " <<  user.pin << ", " << user.balance << "\n";
 
     return 0;
 }
 
-
-bool findUser(map<string, vector<string>> &argMap, string search) {
+void fillStruct(map<string, vector<string>> &argMap, string &search, Person &user) {
     auto it = argMap.find(search);
-    if (it != argMap.end()) { return true; }
-    else { return false; }
+
+    if (it != argMap.end()) {
+        user.name = it->first;
+        vector<string> tempVec = it->second;
+        user.pin = tempVec[0];
+        user.balance = tempVec[1];
+    }
+    else { cout << "User not found\n"; }
 }
 
 void getMapData(map<string, vector<string>> &argMap) {
