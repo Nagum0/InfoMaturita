@@ -6,21 +6,42 @@
 #include <string>
 using namespace std;
 
+struct Person {
+    string name;
+    string pin;
+    string balance;
+};
+
+Person zeki;
+string firstName = "Zeki";
 map<string, vector<string>> myMap;
 void getMapData(map<string, vector<string>> &argMap);
+bool findUser(map<string, vector<string>> &argMap, string search);
 
 int main() {
     getMapData(myMap);
 
-    for (auto itr = myMap.begin(); itr != myMap.end(); itr++) {
-        cout << (*itr).first << " ";
-        for (vector<string>::size_type i = 0; i < (*itr).second.size(); i++) {
-            cout << (*itr).second[i] << " ";
+    if (findUser(myMap, firstName)) {
+        for (auto itr = myMap.begin(); itr != myMap.end(); itr++) {
+            cout << (*itr).first << " ";
+
+            for (vector<string>::size_type i = 0; i < (*itr).second.size(); i++) {
+                cout << (*itr).second[i] << " ";
+            }
+
+            cout << "\n";
         }
-        cout << "\n";
     }
+    else { cout << "User not found" << "\n"; }
 
     return 0;
+}
+
+
+bool findUser(map<string, vector<string>> &argMap, string search) {
+    auto it = argMap.find(search);
+    if (it != argMap.end()) { return true; }
+    else { return false; }
 }
 
 void getMapData(map<string, vector<string>> &argMap) {
