@@ -1,4 +1,4 @@
-Zeki 1
-Astolfo 1
-Ferris 1
-Dani 1
+Zeki 0000
+Astolfo 1111
+Ferris 2222
+Dani 3333

@@ -10,7 +10,6 @@ struct Info {
     int age;
     int balance;
     string pin;
-    bool newAccount; //0 = true, 1 = false
 };
 
 /* Variables */
@@ -23,7 +22,8 @@ void personInfo(Info &person);
 void listOfCmds();
 void readFile(map<string, string>& argMap);
 bool findUser(map<string, string>& argMap, string element);
-void newAccountSetup();
+void newAccountSetup(Info &user);
+void devShowAccount(map<string, string> &argMap);
 
 /* Main function */
 int main() {
@@ -38,13 +38,14 @@ int main() {
 
     //Mainloop
     do {
-        cout << "> ";
+        cout << "$ ";
         getline(cin >> ws, cmd);
 
         if (cmd == "setup" || cmd == "Setup") { personSetup(user); continue; }
         else if (cmd == "info" || cmd == "Info") { personInfo(user); continue; }
         else if (cmd == "cmds" || cmd == "command_list") { listOfCmds(); continue; }
         else if (cmd == "find_user") { findUser(dataMap, user.firstName); continue; }
+        else if (cmd == "dev_show_user_data") { devShowAccount(dataMap); continue; }
         else if (cmd == "!!" || cmd == "exit") { break; }
         else { cout << "Unkown command. \nFor command list type 'cmds' or 'command_list'.\n"; continue; }
 
@@ -97,4 +98,22 @@ bool findUser(map<string, string>& argMap, string element) {
 
     if (it != argMap.end()) { return true; }
     else { return false;}   
+}
+
+//New account setup
+void newAccountSetup(Info &user) {
+    cout << "First name: ";
+    cin >> user.firstName;
+    cout << "Last name: ";
+    cin >> user.lastName;
+    cout << "Age";
+    cin >> user.age;
+}
+
+//Dev show user accounts
+
+void devShowAccount(map<string, string> &argMap) {
+    for (auto itr = argMap.begin(); itr != argMap.end(); itr++) {
+        cout << (*itr).first << " : " << (*itr).second << "\n";
+    }
 }
