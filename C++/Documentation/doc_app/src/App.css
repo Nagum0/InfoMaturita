@@ -19,7 +19,7 @@
   flex-direction: column;
 }
 
-.menu_title {
+.home_title {
   font-size: 30px;
   text-align: center;
   margin-top: 15px;
@@ -33,4 +33,9 @@
 .drop_down_menu_ul {
   margin-left: 40px;
   list-style-type: none;
+}
+
+/* Home styling */
+.home_temp {
+  background-color: aqua;
 }

@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 import '../App.css';
 import { useState } from 'react';;
 
@@ -17,8 +19,10 @@ function Menu () {
     return (
         <div className='menu_div'>
             {/* Title */}
-                <h1 className='menu_title'>
-                    Menu
+                <h1 className='home_title'>
+                    <Link to="/">
+                        Home
+                    </Link>
                 </h1>
 
             {/* Tetelek dropdown menu */}
@@ -29,10 +33,14 @@ function Menu () {
             {isOpen && (
                 <ul className='drop_down_menu_ul'>
                     <li className="drop_down_item">
-                        List
+                        <Link to="/list">
+                            List
+                        </Link>
                     </li>
                     <li className="drop_down_item">
-                        Python
+                        <Link to='/python'>
+                            Python
+                        </Link>
                     </li>
                     <li className="drop_down_item">
                         C++
