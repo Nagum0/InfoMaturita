@@ -1,43 +1,45 @@
 #include <iostream>
 #include <map>
+#include <vector>
 #include <fstream>
-#include <typeinfo>
+#include <sstream>
+#include <string>
 using namespace std;
 
-map<string, string> map2;
-string firstName = "Bunti";
-bool check;
-
-void editMap(map<string, string>& argMap);
+map<string, vector<string>> myMap;
+void getMapData(map<string, vector<string>> &argMap);
 
 int main() {
-    editMap(map2);
-    
-    //Check if account exists or not
-    for (auto itr = map2.begin(); itr != map2.end(); itr++) {
-        if ((*itr).first == firstName && (*itr).second == "0") { check = true; }
-        else if ((*itr).first == firstName && (*itr).second == "1") { check = false; }
-        else { cout << "Username not recognized!\n"; check = true; }
-    }
+    getMapData(myMap);
 
-    printf("%s %s \n", firstName.c_str(), check?"new" : "existing");
+    for (auto itr = myMap.begin(); itr != myMap.end(); itr++) {
+        cout << (*itr).first << " ";
+        for (vector<string>::size_type i = 0; i < (*itr).second.size(); i++) {
+            cout << (*itr).second[i] << " ";
+        }
+        cout << "\n";
+    }
 
     return 0;
 }
 
-void editMap(map<string, string>& argMap) {
-    string fileName = "C:\\Users\\csabe\\OneDrive\\Documents\\01 MATURITA\\Info\\Tetelek\\C++\\ATM app\\userData.txt";
-    string key, value;
-    ifstream inputFile(fileName);
+void getMapData(map<string, vector<string>> &argMap) {
+    string fileName = "C:\\Users\\csabe\\OneDrive\\Documents\\01 MATURITA\\Info\\Tetelek\\C++\\ATM app\\userData.txt"; 
+    ifstream file(fileName);
 
-    if (!inputFile) {
-        cerr << "Failed to open file " << fileName << endl;
-        return;
+    if (file.is_open()) {
+        string line;
+
+        while (getline(file, line)) {
+            istringstream iss(line);
+            string key;
+            iss >> key;
+            string value;
+            while (iss >> value) {
+                argMap[key].push_back(value);
+            }
+        }
     }
 
-    while (inputFile >> key >> value) {
-        argMap.insert(pair<string, string>(key, value));
-    }
-
-    inputFile.close();
+    file.close();
 }
