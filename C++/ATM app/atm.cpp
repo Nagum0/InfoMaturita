@@ -24,6 +24,7 @@ void readFile(map<string, string>& argMap);
 bool findUser(map<string, string>& argMap, string element);
 void newAccountSetup(Info &user);
 void devShowAccount(map<string, string> &argMap);
+string genPinCode();
 
 /* Main function */
 int main() {
@@ -42,6 +43,7 @@ int main() {
         getline(cin >> ws, cmd);
 
         if (cmd == "setup" || cmd == "Setup") { personSetup(user); continue; }
+        else if (cmd == "new_acc") { newAccountSetup(user); continue; }
         else if (cmd == "info" || cmd == "Info") { personInfo(user); continue; }
         else if (cmd == "cmds" || cmd == "command_list") { listOfCmds(); continue; }
         else if (cmd == "find_user") { findUser(dataMap, user.firstName); continue; }
@@ -106,12 +108,18 @@ void newAccountSetup(Info &user) {
     cin >> user.firstName;
     cout << "Last name: ";
     cin >> user.lastName;
-    cout << "Age";
+    cout << "Age: ";
     cin >> user.age;
+    
+    cout << "To finish setting up your account type `gen_pin` to generate your new PIN" << "\n";
+}
+
+//Generate new account pincode
+string genPinCode() {
+    return "3333";
 }
 
 //Dev show user accounts
-
 void devShowAccount(map<string, string> &argMap) {
     for (auto itr = argMap.begin(); itr != argMap.end(); itr++) {
         cout << (*itr).first << " : " << (*itr).second << "\n";
