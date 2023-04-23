@@ -26,6 +26,8 @@ int main() {
     //Command variable
     std::string cmd;
 
+    std::cout << "--------------ATM--------------" << "\n";
+
     do {
         std::cout << "$ ";
         std::getline(std::cin >> std::ws, cmd);
@@ -34,6 +36,9 @@ int main() {
         else { std::cout << "Command not recognized" << "\n"; continue; }
 
     } while (cmd != "!!");
+
+    
+    std::cout << "-------------------------------" << "\n";
 
     return 0;
 }
