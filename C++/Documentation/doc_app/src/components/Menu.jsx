@@ -43,7 +43,9 @@ function Menu () {
                         </Link>
                     </li>
                     <li className="drop_down_item">
-                        C++
+                        <Link to="/c++">
+                            C++
+                        </Link>
                     </li>
                 </ul>
             )}
